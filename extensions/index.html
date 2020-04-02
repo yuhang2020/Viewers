@@ -177,6 +177,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.3.4" data-path="../development/testing.html">
+            
+                <a href="../development/testing.html">
+            
+                    
+                    Testing
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -965,14 +978,15 @@ more <a href="#modules">modules</a> and/or <a href="#lifecycle-hooks">lifecycle 
 </code></pre>
 <h3 id="registering-an-extension"><a name="registering-an-extension" class="plugin-anchor" href="#registering-an-extension"><i class="fa fa-link" aria-hidden="true"></i></a>Registering an Extension</h3>
 <p>There are two different ways to register and configure extensions: At
-<a href="#runtime-extensions">runtime</a> and at <a href="#bundled-extensions">build time</a>.</p>
+<a href="#registering-at-runtime">runtime</a> and at
+<a href="#registering-at-build-time">build time</a>.</p>
 <p>You can leverage one or both strategies. Which one(s) you choose depend on your
 application&apos;s requirements. Each <a href="#modules">module</a> defined by the extension
 becomes available to the core application via the <code>ExtensionManager</code>.</p>
 <h4 id="registering-at-runtime"><a name="registering-at-runtime" class="plugin-anchor" href="#registering-at-runtime"><i class="fa fa-link" aria-hidden="true"></i></a>Registering at Runtime</h4>
-<p>The <code>@ohif/viewer</code> uses a <a href="#">configuration file</a> at startup. The schema for
-that file includes an <code>Extensions</code> key that supports an array of extensions to
-register.</p>
+<p>The <code>@ohif/viewer</code> uses a <a href="../viewer/configuration.html">configuration file</a> at
+startup. The schema for that file includes an <code>Extensions</code> key that supports an
+array of extensions to register.</p>
 <pre><code class="lang-js"><span class="hljs-comment">// prettier-ignore</span>
 <span class="hljs-keyword">const</span> config = {
   extensions: [
@@ -1088,14 +1102,14 @@ today, create a GitHub issue!</p>
 <h3 id="extensionmanager"><a name="extensionmanager" class="plugin-anchor" href="#extensionmanager"><i class="fa fa-link" aria-hidden="true"></i></a><code>ExtensionManager</code></h3>
 <p>The <code>ExtensionManager</code> is a class made available to us via the <code>@ohif/core</code>
 project (platform/core). Our application instantiates a single instance of it,
-and provides a <code>ServicesManager</code> and <code>CommandsManager</code> along with the application&apos;s
-configuration through the appConfig key (optional).</p>
+and provides a <code>ServicesManager</code> and <code>CommandsManager</code> along with the
+application&apos;s configuration through the appConfig key (optional).</p>
 <pre><code class="lang-js"><span class="hljs-keyword">const</span> commandsManager = <span class="hljs-keyword">new</span> CommandsManager();
 <span class="hljs-keyword">const</span> servicesManager = <span class="hljs-keyword">new</span> ServicesManager();
 <span class="hljs-keyword">const</span> extensionManager = <span class="hljs-keyword">new</span> ExtensionManager({
   commandsManager,
   servicesManager,
-  appConfig
+  appConfig,
 });
 </code></pre>
 <p>The <code>ExtensionManager</code> only has a few public members:</p>
@@ -1104,8 +1118,9 @@ configuration through the appConfig key (optional).</p>
 <li><code>registerExtensions</code> - Registers an array of extensions</li>
 <li><code>modules</code> - An object containing registered extensions by <code>MODULE_TYPE</code></li>
 </ul>
-<p>During registration, lifecycle hooks and modules have access to the extension&apos;s config,
-the application&apos;s config and <code>ExtensionManager</code>&apos;s <code>ServicesManager</code> and <code>CommandsManager</code> instances.</p>
+<p>During registration, lifecycle hooks and modules have access to the extension&apos;s
+config, the application&apos;s config and <code>ExtensionManager</code>&apos;s <code>ServicesManager</code> and
+<code>CommandsManager</code> instances.</p>
 <p>Our <code>@ohif/viewer</code> uses the <code>modules</code> member to access registered extensions at
 appropriate places in our application.</p>
 <h2 id="maintained-extensions"><a name="maintained-extensions" class="plugin-anchor" href="#maintained-extensions"><i class="fa fa-link" aria-hidden="true"></i></a>Maintained Extensions</h2>
@@ -1145,6 +1160,7 @@ the top level <a href="https://github.com/OHIF/Viewers/tree/master/extensions" t
             </td>
             <td>Viewport, Toolbar</td>
         </tr>
+        <!-- dicom-html -->
         <tr>
             <td>
                 <a href="https://www.npmjs.com/package/@ohif/extension-dicom-html" target="_blank">DICOM HTML</a>
@@ -1154,6 +1170,7 @@ the top level <a href="https://github.com/OHIF/Viewers/tree/master/extensions" t
             </td>
             <td>Viewport, SopClassHandler</td>
         </tr>
+        <!-- dicom-pdf -->
         <tr>
             <td>
                 <a href="https://www.npmjs.com/package/@ohif/extension-dicom-pdf" target="_blank">DICOM PDF</a>
@@ -1163,6 +1180,7 @@ the top level <a href="https://github.com/OHIF/Viewers/tree/master/extensions" t
             </td>
             <td>Viewport, SopClassHandler</td>
         </tr>
+        <!-- dicom-microscopy -->
         <tr>
             <td>
                 <a href="https://www.npmjs.com/package/@ohif/extension-dicom-microscopy" target="_blank">DICOM Microscopy</a>
@@ -1171,6 +1189,16 @@ the top level <a href="https://github.com/OHIF/Viewers/tree/master/extensions" t
                 Renders Microscopy images for a <a href="https://github.com/OHIF/Viewers/blob/master/extensions/dicom-microscopy/src/DicomMicroscopySopClassHandler.js#L5-L7" target="_blank">specific SopClassUID</a>.
             </td>
             <td>Viewport, SopClassHandler</td>
+        </tr>
+        <!-- dicom-segmentation -->
+        <tr>
+            <td>
+                <a href="https://www.npmjs.com/package/@ohif/extension-dicom-segmentation" target="_blank">DICOM Segmentation</a>
+            </td>
+            <td>
+                Renders segmentation images for a <a href="https://github.com/OHIF/Viewers/blob/master/extensions/dicom-segmentation/src/OHIFDicomSegSopClassHandler.js#L5-L7" target="_blank">specific SopClassUID</a>.
+            </td>
+            <td>Panel, Toolbar</td>
         </tr>
     </tbody>
 </table>
@@ -1225,7 +1253,7 @@ the top level <a href="https://github.com/OHIF/Viewers/tree/master/extensions" t
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Extensions","level":"2.3","depth":1,"next":{"title":"Registering","level":"2.3.1","depth":2,"anchor":"#registering-an-extension","path":"extensions/index.md","ref":"extensions/index.md#registering-an-extension","articles":[]},"previous":{"title":"Internationalization","level":"2.2.3","depth":2,"path":"viewer/internationalization.md","ref":"viewer/internationalization.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-cornerstone","-fontsettings","github","ga","sitemap","anchors","versions"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/OHIF/Viewers"},"search":{},"theme-cornerstone":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sitemap":{"hostname":"https://docs.ohif.org"},"ga":{"configuration":"auto","token":"UA-110573590-2"},"versions":{"type":"branches","gitbookConfigURL":"https://raw.githubusercontent.com/OHIF/Viewers/master/docs/book.json","options":[{"value":"https://docs.ohif.org/history/v1/","text":"Version 1.0.0 (Meteor)"},{"value":"https://docs.ohif.org/","text":"Version 2.0.0","selected":true}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/OHIF/Viewers/edit/master/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"OHIF","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0","description":"Documentation for the OHIF framework"},"file":{"path":"extensions/index.md","mtime":"2020-04-02T06:59:36.506Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-02T07:00:28.284Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Extensions","level":"2.3","depth":1,"next":{"title":"Registering","level":"2.3.1","depth":2,"anchor":"#registering-an-extension","path":"extensions/index.md","ref":"extensions/index.md#registering-an-extension","articles":[]},"previous":{"title":"Internationalization","level":"2.2.3","depth":2,"path":"viewer/internationalization.md","ref":"viewer/internationalization.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-cornerstone","-fontsettings","github","ga","sitemap","anchors","versions"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/OHIF/Viewers"},"search":{},"theme-cornerstone":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sitemap":{"hostname":"https://docs.ohif.org"},"ga":{"configuration":"auto","token":"UA-110573590-2"},"versions":{"type":"branches","gitbookConfigURL":"https://raw.githubusercontent.com/OHIF/Viewers/master/docs/book.json","options":[{"value":"https://docs.ohif.org/history/v1/","text":"Version 1.0.0 (Meteor)"},{"value":"https://docs.ohif.org/","text":"Version 2.0.0","selected":true}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/OHIF/Viewers/edit/master/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"OHIF","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0","description":"Documentation for the OHIF framework"},"file":{"path":"extensions/index.md","mtime":"2020-04-02T13:25:10.745Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-02T13:26:33.033Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

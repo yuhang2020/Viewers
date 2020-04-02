@@ -177,6 +177,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.3.4" data-path="../development/testing.html">
+            
+                <a href="../development/testing.html">
+            
+                    
+                    Testing
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -991,7 +1004,7 @@ usage.</p>
 </code></pre>
 <hr>
 <h1 id="main-concepts-while-translating"><a name="main-concepts-while-translating" class="plugin-anchor" href="#main-concepts-while-translating"><i class="fa fa-link" aria-hidden="true"></i></a>Main Concepts While Translating</h1>
-<h2 id="-namespaces"><a name="-namespaces" class="plugin-anchor" href="#-namespaces"><i class="fa fa-link" aria-hidden="true"></i></a>- Namespaces</h2>
+<h2 id="namespaces"><a name="namespaces" class="plugin-anchor" href="#namespaces"><i class="fa fa-link" aria-hidden="true"></i></a>Namespaces</h2>
 <p>Namespaces are being used to organize translations in smaller portions, combined
 semantically or by use. Each <code>.json</code> file inside <code>@ohif/i18n</code> npm package
 becomes a new namespace automatically.</p>
@@ -1007,7 +1020,7 @@ becomes a new namespace automatically.</p>
 <p>i18next provides a parsing feature able to get translations strings from any
 NameSpace, like this following example getting data from <code>Common</code> NameSpace:</p>
 <pre><code>$t(Common:Reset)
-</code></pre><h2 id="-extending-languages-in-ohifi18n"><a name="-extending-languages-in-ohifi18n" class="plugin-anchor" href="#-extending-languages-in-ohifi18n"><i class="fa fa-link" aria-hidden="true"></i></a>- Extending Languages in @ohif/i18n</h2>
+</code></pre><h2 id="extending-languages-in-ohifi18n"><a name="extending-languages-in-ohifi18n" class="plugin-anchor" href="#extending-languages-in-ohifi18n"><i class="fa fa-link" aria-hidden="true"></i></a>Extending Languages in @ohif/i18n</h2>
 <p>Sometimes, even using the same language, some nouns or jargons can change
 according to the country, states or even from Hospital to Hospital.</p>
 <p>In this cases, you don&apos;t need to set an entire language again, you can extend
@@ -1051,7 +1064,7 @@ object like this:</p>
 </code></pre>
 <p>Please check the <code>index.js</code> files inside locales folder for an example of this
 exporting structure.</p>
-<h3 id="-extending-languages-dynamically"><a name="-extending-languages-dynamically" class="plugin-anchor" href="#-extending-languages-dynamically"><i class="fa fa-link" aria-hidden="true"></i></a>- Extending languages dynamically</h3>
+<h3 id="extending-languages-dynamically"><a name="extending-languages-dynamically" class="plugin-anchor" href="#extending-languages-dynamically"><i class="fa fa-link" aria-hidden="true"></i></a>Extending languages dynamically</h3>
 <p>You have access to the i18next instance, so you can use the
 <a href="https://www.i18next.com/how-to/add-or-load-translations#add-after-init" target="_blank">addResourceBundle</a>
 method to add and change language resources as needed.</p>
@@ -1122,7 +1135,7 @@ called <code>REACT_APP_I18N_DEBUG</code>.</p>
 </code></pre>
 <h3 id="contributing-with-new-languages"><a name="contributing-with-new-languages" class="plugin-anchor" href="#contributing-with-new-languages"><i class="fa fa-link" aria-hidden="true"></i></a>Contributing with new languages</h3>
 <p>Contributions of any kind are welcome! Please check the
-<a href="https://docs.ohif.org/contributing.html" target="_blank">instructions</a>.</p>
+<a href="../development/contributing.html">instructions</a>.</p>
 
                                 
                                 </section>
@@ -1167,7 +1180,7 @@ called <code>REACT_APP_I18N_DEBUG</code>.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Internationalization","level":"2.2.3","depth":2,"next":{"title":"Extensions","level":"2.3","depth":1,"path":"extensions/index.md","ref":"extensions/index.md","articles":[{"title":"Registering","level":"2.3.1","depth":2,"anchor":"#registering-an-extension","path":"extensions/index.md","ref":"extensions/index.md#registering-an-extension","articles":[]},{"title":"Lifecycle Hooks","level":"2.3.2","depth":2,"anchor":"#lifecycle-hooks","path":"extensions/index.md","ref":"extensions/index.md#lifecycle-hooks","articles":[{"title":"preRegistration","level":"2.3.2.1","depth":3,"path":"extensions/lifecycle/pre-registration.md","ref":"extensions/lifecycle/pre-registration.md","articles":[]}]},{"title":"Modules","level":"2.3.3","depth":2,"anchor":"#modules","path":"extensions/index.md","ref":"extensions/index.md#modules","articles":[{"title":"Commands","level":"2.3.3.1","depth":3,"path":"extensions/modules/commands.md","ref":"extensions/modules/commands.md","articles":[]},{"title":"Panel","level":"2.3.3.2","depth":3,"path":"extensions/modules/panel.md","ref":"extensions/modules/panel.md","articles":[]},{"title":"SOP Class Handler","level":"2.3.3.3","depth":3,"path":"extensions/modules/sop-class-handler.md","ref":"extensions/modules/sop-class-handler.md","articles":[]},{"title":"Toolbar","level":"2.3.3.4","depth":3,"path":"extensions/modules/toolbar.md","ref":"extensions/modules/toolbar.md","articles":[]},{"title":"Viewport","level":"2.3.3.5","depth":3,"path":"extensions/modules/viewport.md","ref":"extensions/modules/viewport.md","articles":[]}]},{"title":"Contexts","level":"2.3.4","depth":2,"anchor":"#contexts","path":"extensions/index.md","ref":"extensions/index.md#contexts","articles":[]},{"title":"ExtensionManager","level":"2.3.5","depth":2,"anchor":"#extensionmanager","path":"extensions/index.md","ref":"extensions/index.md#extensionmanager","articles":[]},{"title":"OHIF Maintained","level":"2.3.6","depth":2,"anchor":"#maintained-extensions","path":"extensions/index.md","ref":"extensions/index.md#maintained-extensions","articles":[]}]},"previous":{"title":"Themeing","level":"2.2.2","depth":2,"path":"viewer/themeing.md","ref":"viewer/themeing.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-cornerstone","-fontsettings","github","ga","sitemap","anchors","versions"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/OHIF/Viewers"},"search":{},"theme-cornerstone":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sitemap":{"hostname":"https://docs.ohif.org"},"ga":{"configuration":"auto","token":"UA-110573590-2"},"versions":{"type":"branches","gitbookConfigURL":"https://raw.githubusercontent.com/OHIF/Viewers/master/docs/book.json","options":[{"value":"https://docs.ohif.org/history/v1/","text":"Version 1.0.0 (Meteor)"},{"value":"https://docs.ohif.org/","text":"Version 2.0.0","selected":true}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/OHIF/Viewers/edit/master/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"OHIF","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0","description":"Documentation for the OHIF framework"},"file":{"path":"viewer/internationalization.md","mtime":"2020-04-02T06:59:36.546Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-02T07:00:28.284Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Internationalization","level":"2.2.3","depth":2,"next":{"title":"Extensions","level":"2.3","depth":1,"path":"extensions/index.md","ref":"extensions/index.md","articles":[{"title":"Registering","level":"2.3.1","depth":2,"anchor":"#registering-an-extension","path":"extensions/index.md","ref":"extensions/index.md#registering-an-extension","articles":[]},{"title":"Lifecycle Hooks","level":"2.3.2","depth":2,"anchor":"#lifecycle-hooks","path":"extensions/index.md","ref":"extensions/index.md#lifecycle-hooks","articles":[{"title":"preRegistration","level":"2.3.2.1","depth":3,"path":"extensions/lifecycle/pre-registration.md","ref":"extensions/lifecycle/pre-registration.md","articles":[]}]},{"title":"Modules","level":"2.3.3","depth":2,"anchor":"#modules","path":"extensions/index.md","ref":"extensions/index.md#modules","articles":[{"title":"Commands","level":"2.3.3.1","depth":3,"path":"extensions/modules/commands.md","ref":"extensions/modules/commands.md","articles":[]},{"title":"Panel","level":"2.3.3.2","depth":3,"path":"extensions/modules/panel.md","ref":"extensions/modules/panel.md","articles":[]},{"title":"SOP Class Handler","level":"2.3.3.3","depth":3,"path":"extensions/modules/sop-class-handler.md","ref":"extensions/modules/sop-class-handler.md","articles":[]},{"title":"Toolbar","level":"2.3.3.4","depth":3,"path":"extensions/modules/toolbar.md","ref":"extensions/modules/toolbar.md","articles":[]},{"title":"Viewport","level":"2.3.3.5","depth":3,"path":"extensions/modules/viewport.md","ref":"extensions/modules/viewport.md","articles":[]}]},{"title":"Contexts","level":"2.3.4","depth":2,"anchor":"#contexts","path":"extensions/index.md","ref":"extensions/index.md#contexts","articles":[]},{"title":"ExtensionManager","level":"2.3.5","depth":2,"anchor":"#extensionmanager","path":"extensions/index.md","ref":"extensions/index.md#extensionmanager","articles":[]},{"title":"OHIF Maintained","level":"2.3.6","depth":2,"anchor":"#maintained-extensions","path":"extensions/index.md","ref":"extensions/index.md#maintained-extensions","articles":[]}]},"previous":{"title":"Themeing","level":"2.2.2","depth":2,"path":"viewer/themeing.md","ref":"viewer/themeing.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-cornerstone","-fontsettings","github","ga","sitemap","anchors","versions"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/OHIF/Viewers"},"search":{},"theme-cornerstone":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sitemap":{"hostname":"https://docs.ohif.org"},"ga":{"configuration":"auto","token":"UA-110573590-2"},"versions":{"type":"branches","gitbookConfigURL":"https://raw.githubusercontent.com/OHIF/Viewers/master/docs/book.json","options":[{"value":"https://docs.ohif.org/history/v1/","text":"Version 1.0.0 (Meteor)"},{"value":"https://docs.ohif.org/","text":"Version 2.0.0","selected":true}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/OHIF/Viewers/edit/master/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"OHIF","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0","description":"Documentation for the OHIF framework"},"file":{"path":"viewer/internationalization.md","mtime":"2020-04-02T13:25:10.997Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-02T13:26:33.033Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

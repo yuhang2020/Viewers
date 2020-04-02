@@ -177,6 +177,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.3.4" data-path="../../development/testing.html">
+            
+                <a href="../../development/testing.html">
+            
+                    
+                    Testing
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -895,10 +908,10 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="module-sop-class-handler"><a name="module-sop-class-handler" class="plugin-anchor" href="#module-sop-class-handler"><i class="fa fa-link" aria-hidden="true"></i></a>Module: SOP Class Handler</h1>
-<p>An extension can register a SOP Class Handler Module by defining a
-<code>getSopClassHandlerModule</code> method. The SOP Class Handler is a bit different from
-the other modules, as it doesn&apos;t provide a <code>1:1</code> schema for UI or provide it&apos;s
-own components. It instead defines:</p>
+<p>An extension can register a <a href="http://dicom.nema.org/dicom/2013/output/chtml/part04/sect_B.5.html" target="_blank">SOP Class</a> Handler Module by
+defining a <code>getSopClassHandlerModule</code> method. The <a href="http://dicom.nema.org/dicom/2013/output/chtml/part04/sect_B.5.html" target="_blank">SOP Class</a>
+Handler is a bit different from the other modules, as it doesn&apos;t provide a <code>1:1</code>
+schema for UI or provide it&apos;s own components. It instead defines:</p>
 <ul>
 <li><code>sopClassUIDs</code>: an array of string SOP Class UIDs that the
 <code>getDisplaySetFromSeries</code> method should be applied to.</li>
@@ -964,6 +977,13 @@ getSopClassHandlerModule({ servicesManager, commandsManager }) {
   }
 };
 </code></pre>
+<h3 id="more-examples-"><a name="more-examples-" class="plugin-anchor" href="#more-examples-"><i class="fa fa-link" aria-hidden="true"></i></a>More examples :</h3>
+<ul>
+<li><a href="https://github.com/OHIF/Viewers/blob/master/extensions/dicom-html/src/OHIFDicomHtmlSopClassHandler.js#L4-L12" target="_blank">Dicom-HTML SOP</a></li>
+<li><a href="https://github.com/OHIF/Viewers/blob/master/extensions/dicom-pdf/src/OHIFDicomPDFSopClassHandler.js#L4-L6" target="_blank">Dicom-PDF SOP</a></li>
+<li><a href="https://github.com/OHIF/Viewers/blob/master/extensions/dicom-microscopy/src/DicomMicroscopySopClassHandler.js#L5-L7" target="_blank">Dicom-Microscopy SOP</a></li>
+<li><a href="https://github.com/OHIF/Viewers/blob/master/extensions/dicom-segmentation/src/OHIFDicomSegSopClassHandler.js#L5-L7" target="_blank">Dicom-Segmentation SOP</a></li>
+</ul>
 <h2 id="ohifviewer-usage"><a name="ohifviewer-usage" class="plugin-anchor" href="#ohifviewer-usage"><i class="fa fa-link" aria-hidden="true"></i></a><code>@ohif/viewer</code> usage</h2>
 <p>We use the <code>sopClassHandlerModule</code>s in three different places:</p>
 <ul>
@@ -975,6 +995,8 @@ getSopClassHandlerModule({ servicesManager, commandsManager }) {
 this by working alongside the <code>StudyMetadataManager</code> in <code>@ohif/core</code>. That
 manager has the method <code>createDisplaySets</code> that takes an array of
 <code>sopClassHandlerModules</code>.</p>
+<!-- prettier-ignore-start -->
+<!-- prettier-ignore-end -->
 
                                 
                                 </section>
@@ -1019,7 +1041,7 @@ manager has the method <code>createDisplaySets</code> that takes an array of
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"SOP Class Handler","level":"2.3.3.3","depth":3,"next":{"title":"Toolbar","level":"2.3.3.4","depth":3,"path":"extensions/modules/toolbar.md","ref":"extensions/modules/toolbar.md","articles":[]},"previous":{"title":"Panel","level":"2.3.3.2","depth":3,"path":"extensions/modules/panel.md","ref":"extensions/modules/panel.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-cornerstone","-fontsettings","github","ga","sitemap","anchors","versions"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/OHIF/Viewers"},"search":{},"theme-cornerstone":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sitemap":{"hostname":"https://docs.ohif.org"},"ga":{"configuration":"auto","token":"UA-110573590-2"},"versions":{"type":"branches","gitbookConfigURL":"https://raw.githubusercontent.com/OHIF/Viewers/master/docs/book.json","options":[{"value":"https://docs.ohif.org/history/v1/","text":"Version 1.0.0 (Meteor)"},{"value":"https://docs.ohif.org/","text":"Version 2.0.0","selected":true}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/OHIF/Viewers/edit/master/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"OHIF","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0","description":"Documentation for the OHIF framework"},"file":{"path":"extensions/modules/sop-class-handler.md","mtime":"2020-04-02T06:59:36.514Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-02T07:00:28.284Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"SOP Class Handler","level":"2.3.3.3","depth":3,"next":{"title":"Toolbar","level":"2.3.3.4","depth":3,"path":"extensions/modules/toolbar.md","ref":"extensions/modules/toolbar.md","articles":[]},"previous":{"title":"Panel","level":"2.3.3.2","depth":3,"path":"extensions/modules/panel.md","ref":"extensions/modules/panel.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-cornerstone","-fontsettings","github","ga","sitemap","anchors","versions"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/OHIF/Viewers"},"search":{},"theme-cornerstone":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sitemap":{"hostname":"https://docs.ohif.org"},"ga":{"configuration":"auto","token":"UA-110573590-2"},"versions":{"type":"branches","gitbookConfigURL":"https://raw.githubusercontent.com/OHIF/Viewers/master/docs/book.json","options":[{"value":"https://docs.ohif.org/history/v1/","text":"Version 1.0.0 (Meteor)"},{"value":"https://docs.ohif.org/","text":"Version 2.0.0","selected":true}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/OHIF/Viewers/edit/master/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"OHIF","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0","description":"Documentation for the OHIF framework"},"file":{"path":"extensions/modules/sop-class-handler.md","mtime":"2020-04-02T13:25:10.781Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-02T13:26:33.033Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

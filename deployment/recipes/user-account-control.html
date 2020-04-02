@@ -177,6 +177,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.3.4" data-path="../../development/testing.html">
+            
+                <a href="../../development/testing.html">
+            
+                    
+                    Testing
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -1015,7 +1028,10 @@ likely want to update:</p>
 <li>Regenerate Keycloak Client Secrets</li>
 </ul>
 <h4 id="ohif-viewer"><a name="ohif-viewer" class="plugin-anchor" href="#ohif-viewer"><i class="fa fa-link" aria-hidden="true"></i></a>OHIF Viewer</h4>
-<p>The OHIF Viewer&apos;s configuration is imported from a static <code>.js</code> file. The configuration we use is set to a specific file when we build the viewer, and determined by the env variable: <code>APP_CONFIG</code>. You can see where we set its value in the <code>dockerfile</code> for this solution:</p>
+<p>The OHIF Viewer&apos;s configuration is imported from a static <code>.js</code> file. The
+configuration we use is set to a specific file when we build the viewer, and
+determined by the env variable: <code>APP_CONFIG</code>. You can see where we set its value
+in the <code>dockerfile</code> for this solution:</p>
 <p><code>ENV APP_CONFIG=config/docker_openresty-orthanc-keycloak.js</code></p>
 <p>You can find the configuration we&apos;re using here:
 <code>/public/config/docker_openresty-orthanc-keycloak.js</code></p>
@@ -1038,29 +1054,27 @@ Viewer&apos;s configuration, you can run:</p>
 <tbody>
 <tr>
 <td>OHIF Viewer</td>
-<td><a href="https://github.com/OHIF/Viewers/tree/master/platform/viewer/.recipes" target="_blank">dockerfile</a> / <a href="https://github.com/OHIF/Viewers/blob/master/platform/viewer/src/config.js" target="_blank">config.js</a></td>
+<td><a href="https://github.com/OHIF/Viewers/blob/master/platform/viewer/.recipes/OpenResty-Orthanc-Keycloak/dockerfile" target="_blank">dockerfile</a> / <a href="https://github.com/OHIF/Viewers/blob/master/platform/viewer/src/config.js" target="_blank">config.js</a></td>
 <td>You&apos;re reading them now!</td>
 </tr>
 <tr>
 <td>OpenResty (Nginx)</td>
-<td><a href="https://github.com/OHIF/Viewers/tree/master/platform/viewer/.recipes" target="_blank"><code>/nginx.conf</code></a></td>
+<td><a href="https://github.com/OHIF/Viewers/blob/master/platform/viewer/.recipes/OpenResty-Orthanc-Keycloak/config/nginx.conf" target="_blank"><code>/nginx.conf</code></a></td>
 <td><a href="https://github.com/zmartzone/lua-resty-openidc" target="_blank">lua-resty-openidc</a></td>
 </tr>
 <tr>
 <td>Orthanc</td>
-<td><a href="https://github.com/OHIF/Viewers/tree/master/platform/viewer/.recipes" target="_blank"><code>/orthanc.json</code></a></td>
+<td><a href="https://github.com/OHIF/Viewers/blob/master/platform/viewer/.recipes/OpenResty-Orthanc-Keycloak/config/orthanc.json" target="_blank"><code>/orthanc.json</code></a></td>
 <td><a href="http://book.orthanc-server.com/users/configuration.html#configuration" target="_blank">Here</a></td>
 </tr>
 <tr>
 <td>Keycloak</td>
-<td><a href="https://github.com/OHIF/Viewers/tree/master/platform/viewer/.recipes" target="_blank"><code>/ohif-keycloak-realm.json</code></a>*</td>
+<td><a href="https://github.com/OHIF/Viewers/blob/master/platform/viewer/.recipes/OpenResty-Orthanc-Keycloak/config/ohif-keycloak-realm.json" target="_blank"><code>/ohif-keycloak-realm.json</code></a>*</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>* These are the seed values for Keycloak. They can be manually updated at
-<code>http://127.0.0.1/auth/admin</code></li>
-</ul>
+<p>* These are the seed values for Keycloak. They can be manually updated at
+<code>http://127.0.0.1/auth/admin</code></p>
 <h4 id="keycloak-themeing"><a name="keycloak-themeing" class="plugin-anchor" href="#keycloak-themeing"><i class="fa fa-link" aria-hidden="true"></i></a>Keycloak Themeing</h4>
 <p>The <code>Login</code> screen for the <code>ohif-viewer</code> client is using a Custom Keycloak
 theme. You can find the source files for it in
@@ -1166,15 +1180,13 @@ noting that Keycloak comes packaged with its own:</p>
 for OAuth:</p>
 <ul>
 <li><a href="https://medium.com/@darutk/diagrams-of-all-the-openid-connect-flows-6968e3990660" target="_blank">Diagrams of OpenID Connect Flows</a></li>
-<li><a href="https://www.keycloak.org/docs/latest/securing_apps/index.html#authorization-code" target="_blank">KeyCloak: OpenID Connect Flows</a><ul>
-<li><a href="https://www.keycloak.org/docs/2.5/server_admin/topics/sso-protocols/oidc.html" target="_blank">Good description on SSO Protocols</a></li>
+<li><a href="https://www.keycloak.org/docs/latest/securing_apps/index.html#authorization-code" target="_blank">KeyCloak: OpenID Connect Flows</a></li>
 </ul>
-</li>
-</ul>
-<p>For a different take on this setup, check out the repository one of our
-community members put together:</p>
+<p>For a different take on this setup, check out the repositories our community
+members put together:</p>
 <ul>
 <li><a href="https://github.com/mjstealey/ohif-orthanc-dimse-docker" target="_blank">mjstealey/ohif-orthanc-dimse-docker</a></li>
+<li><a href="https://github.com/trypag/ohif-orthanc-postgres-docker" target="_blank">trypag/ohif-orthanc-postgres-docker</a></li>
 </ul>
 <!--
   Links
@@ -1227,7 +1239,7 @@ community members put together:</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"User Account Control","level":"3.2.2.4","depth":3,"next":{"title":"Google Cloud Healthcare","level":"3.2.2.5","depth":3,"path":"connecting-to-image-archives/google-cloud-healthcare.md","ref":"connecting-to-image-archives/google-cloud-healthcare.md","articles":[]},"previous":{"title":"Nginx + Image Archive","level":"3.2.2.3","depth":3,"path":"deployment/recipes/nginx--image-archive.md","ref":"deployment/recipes/nginx--image-archive.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-cornerstone","-fontsettings","github","ga","sitemap","anchors","versions"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/OHIF/Viewers"},"search":{},"theme-cornerstone":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sitemap":{"hostname":"https://docs.ohif.org"},"ga":{"configuration":"auto","token":"UA-110573590-2"},"versions":{"type":"branches","gitbookConfigURL":"https://raw.githubusercontent.com/OHIF/Viewers/master/docs/book.json","options":[{"value":"https://docs.ohif.org/history/v1/","text":"Version 1.0.0 (Meteor)"},{"value":"https://docs.ohif.org/","text":"Version 2.0.0","selected":true}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/OHIF/Viewers/edit/master/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"OHIF","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0","description":"Documentation for the OHIF framework"},"file":{"path":"deployment/recipes/user-account-control.md","mtime":"2020-04-02T06:59:36.498Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-02T07:00:28.284Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"User Account Control","level":"3.2.2.4","depth":3,"next":{"title":"Google Cloud Healthcare","level":"3.2.2.5","depth":3,"path":"connecting-to-image-archives/google-cloud-healthcare.md","ref":"connecting-to-image-archives/google-cloud-healthcare.md","articles":[]},"previous":{"title":"Nginx + Image Archive","level":"3.2.2.3","depth":3,"path":"deployment/recipes/nginx--image-archive.md","ref":"deployment/recipes/nginx--image-archive.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-cornerstone","-fontsettings","github","ga","sitemap","anchors","versions"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/OHIF/Viewers"},"search":{},"theme-cornerstone":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sitemap":{"hostname":"https://docs.ohif.org"},"ga":{"configuration":"auto","token":"UA-110573590-2"},"versions":{"type":"branches","gitbookConfigURL":"https://raw.githubusercontent.com/OHIF/Viewers/master/docs/book.json","options":[{"value":"https://docs.ohif.org/history/v1/","text":"Version 1.0.0 (Meteor)"},{"value":"https://docs.ohif.org/","text":"Version 2.0.0","selected":true}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/OHIF/Viewers/edit/master/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"OHIF","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0","description":"Documentation for the OHIF framework"},"file":{"path":"deployment/recipes/user-account-control.md","mtime":"2020-04-02T13:25:10.685Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-02T13:26:33.033Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
