@@ -918,6 +918,14 @@ are:</p>
 </ul>
 <pre><code class="lang-js"><span class="hljs-built_in">window</span>.config = {
   routerBasename: <span class="hljs-string">&apos;/&apos;</span>,
+  <span class="hljs-comment">/**
+   * &quot;White Labeling&quot; is used to change the branding, look, and feel of the OHIF
+   * Viewer. These settings, and the color variables that are used by our components,
+   * are the easiest way to rebrand the application.
+   *
+   * More extensive changes are made possible through swapping out the UI library,
+   * Viewer project, or extensions.
+   */</span>
   whiteLabeling: {
     <span class="hljs-comment">/* Optional: Should return a React component to be rendered in the &quot;Logo&quot; section of the application&apos;s Top Navigation bar */</span>
     createLogoComponentFn: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">React</span>) </span>{
@@ -936,6 +944,32 @@ are:</p>
         },
       });
     },
+  },
+  <span class="hljs-comment">/**
+   * Internally, the OHIF Viewer fetches data primarily with the
+   * `cornerstoneWADOImageLoader` and the `DICOMWebClient`. If either of these
+   * receive a non-200 response, this method allows you to handle that error.
+   *
+   * Common use cases include:
+   * - Showing a notification with the UINotificationService
+   * - Redirecting the user
+   * - Refreshing an auth token
+   *
+   * @param {Object} error - JS new Error()
+   * @param {XMLHttpRequest} error.request - The XHR request that&apos;s onreadystate change triggered this callback
+   * @param {string} error.response - The XHR&apos;s response property
+   * @param {number} error.status - The XHR&apos;s status property
+   */</span>
+  httpErrorHandler: error =&gt; {
+    <span class="hljs-keyword">const</span> { request: xhr, response, status } = err;
+    <span class="hljs-keyword">const</span> { responseType, statusText } = xhr;
+
+    <span class="hljs-comment">// In local files, status is 0 upon success in Firefox</span>
+    <span class="hljs-keyword">if</span> (xhr.readyState === XMLHttpRequest.DONE) {
+      <span class="hljs-built_in">console</span>.log(statusText, response, responseType);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-built_in">console</span>.warn(<span class="hljs-string">&apos;Likely CORS error&apos;</span>);
+    }
   },
   extensions: [],
   showStudyList: <span class="hljs-literal">true</span>,
@@ -1031,7 +1065,7 @@ are:</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Configuration","level":"2.2.1","depth":2,"next":{"title":"Themeing","level":"2.2.2","depth":2,"path":"viewer/themeing.md","ref":"viewer/themeing.md","articles":[]},"previous":{"title":"Viewer","level":"2.2","depth":1,"path":"viewer/index.md","ref":"viewer/index.md","articles":[{"title":"Configuration","level":"2.2.1","depth":2,"path":"viewer/configuration.md","ref":"viewer/configuration.md","articles":[]},{"title":"Themeing","level":"2.2.2","depth":2,"path":"viewer/themeing.md","ref":"viewer/themeing.md","articles":[]},{"title":"Internationalization","level":"2.2.3","depth":2,"path":"viewer/internationalization.md","ref":"viewer/internationalization.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-cornerstone","-fontsettings","github","ga","sitemap","anchors","versions"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/OHIF/Viewers"},"search":{},"theme-cornerstone":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sitemap":{"hostname":"https://docs.ohif.org"},"ga":{"configuration":"auto","token":"UA-110573590-2"},"versions":{"type":"branches","gitbookConfigURL":"https://raw.githubusercontent.com/OHIF/Viewers/master/docs/book.json","options":[{"value":"https://docs.ohif.org/history/v1/","text":"Version 1.0.0 (Meteor)"},{"value":"https://docs.ohif.org/","text":"Version 2.0.0","selected":true}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/OHIF/Viewers/edit/master/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"OHIF","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0","description":"Documentation for the OHIF framework"},"file":{"path":"viewer/configuration.md","mtime":"2020-04-22T20:17:20.142Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-22T20:18:19.577Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Configuration","level":"2.2.1","depth":2,"next":{"title":"Themeing","level":"2.2.2","depth":2,"path":"viewer/themeing.md","ref":"viewer/themeing.md","articles":[]},"previous":{"title":"Viewer","level":"2.2","depth":1,"path":"viewer/index.md","ref":"viewer/index.md","articles":[{"title":"Configuration","level":"2.2.1","depth":2,"path":"viewer/configuration.md","ref":"viewer/configuration.md","articles":[]},{"title":"Themeing","level":"2.2.2","depth":2,"path":"viewer/themeing.md","ref":"viewer/themeing.md","articles":[]},{"title":"Internationalization","level":"2.2.3","depth":2,"path":"viewer/internationalization.md","ref":"viewer/internationalization.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-cornerstone","-fontsettings","github","ga","sitemap","anchors","versions"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/OHIF/Viewers"},"search":{},"theme-cornerstone":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sitemap":{"hostname":"https://docs.ohif.org"},"ga":{"configuration":"auto","token":"UA-110573590-2"},"versions":{"type":"branches","gitbookConfigURL":"https://raw.githubusercontent.com/OHIF/Viewers/master/docs/book.json","options":[{"value":"https://docs.ohif.org/history/v1/","text":"Version 1.0.0 (Meteor)"},{"value":"https://docs.ohif.org/","text":"Version 2.0.0","selected":true}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/OHIF/Viewers/edit/master/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"OHIF","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0","description":"Documentation for the OHIF framework"},"file":{"path":"viewer/configuration.md","mtime":"2020-04-23T02:02:22.070Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-23T02:02:56.357Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
