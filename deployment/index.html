@@ -1017,11 +1017,86 @@ It&apos;s common to use IIS, Nginx, or Apache to route incoming requests and app
 appropriate headers. You can find an example of this setup in our
 <a href="recipes/nginx--image-archive.html">Nginx + Image Archive Deployment Recipe</a>.</p>
 <h4 id="what-if-my-archive-doesnt-support-dicomweb"><a name="what-if-my-archive-doesnt-support-dicomweb" class="plugin-anchor" href="#what-if-my-archive-doesnt-support-dicomweb"><i class="fa fa-link" aria-hidden="true"></i></a>What if my archive doesn&apos;t support DicomWeb?</h4>
-<blockquote>
-<p>This is possible to do with the OHIF Viewer, but not as straightforward. Look
-out for documentation on this subject in the near future.</p>
-</blockquote>
-<p>...</p>
+<p>It&apos;s possible to supply all Study data via JSON format, in the event you do not have a DicomWeb endpoint.
+You can host all of the relevant files on any web accessible server (Amazon S3, Azure Blob Storage, Local file server etc.)</p>
+<p>This JSON is supplied via the &apos;?url=&apos; query parameter.
+It should reference an endpoint that returns <strong>application/json</strong> formatted text.</p>
+<p>If you do not have an API, you can simply return a text file containing the JSON from any web server.</p>
+<p>You tell the OHIF viewer to use JSON by appending the <code>&apos;?url=&apos;</code> query to the <code>/Viewer</code> route:</p>
+<p>eg. <code>https://my-test-ohif-server/viewer?url=https://my-json-server/study-uid.json</code></p>
+<p>The returned JSON object must contain a single root object with a &apos;studies&apos; array.</p>
+<p><em>Sample JSON format:</em></p>
+<pre><code class="lang-JSON">{
+    <span class="hljs-string">&quot;studies&quot;</span>: [
+      {
+        <span class="hljs-string">&quot;StudyInstanceUID&quot;</span>: <span class="hljs-string">&quot;1.2.840.113619.2.5.1762583153.215519.978957063.78&quot;</span>,
+        <span class="hljs-string">&quot;StudyDescription&quot;</span>: <span class="hljs-string">&quot;BRAIN SELLA&quot;</span>,
+        <span class="hljs-string">&quot;StudyDate&quot;</span>: <span class="hljs-string">&quot;20010108&quot;</span>,
+        <span class="hljs-string">&quot;StudyTime&quot;</span>: <span class="hljs-string">&quot;120022&quot;</span>,
+        <span class="hljs-string">&quot;PatientName&quot;</span>: <span class="hljs-string">&quot;MISTER^MR&quot;</span>,
+        <span class="hljs-string">&quot;PatientId&quot;</span>: <span class="hljs-string">&quot;832040&quot;</span>,
+        <span class="hljs-string">&quot;series&quot;</span>: [
+          {
+            <span class="hljs-string">&quot;SeriesDescription&quot;</span>: <span class="hljs-string">&quot;SAG T-1&quot;</span>,
+            <span class="hljs-string">&quot;SeriesInstanceUID&quot;</span>: <span class="hljs-string">&quot;1.2.840.113619.2.5.1762583153.215519.978957063.121&quot;</span>,
+            <span class="hljs-string">&quot;SeriesNumber&quot;</span>: <span class="hljs-number">2</span>,
+            <span class="hljs-string">&quot;SeriesDate&quot;</span>: <span class="hljs-string">&quot;20010108&quot;</span>,
+            <span class="hljs-string">&quot;SeriesTime&quot;</span>: <span class="hljs-string">&quot;120318&quot;</span>,
+            <span class="hljs-string">&quot;Modality&quot;</span>: <span class="hljs-string">&quot;MR&quot;</span>,
+            <span class="hljs-string">&quot;instances&quot;</span>: [
+              {
+                <span class="hljs-string">&quot;metadata&quot;</span>: {
+                    <span class="hljs-string">&quot;Columns&quot;</span>: <span class="hljs-number">512</span>,
+                    <span class="hljs-string">&quot;Rows&quot;</span>: <span class="hljs-number">512</span>,
+                    <span class="hljs-string">&quot;InstanceNumber&quot;</span>: <span class="hljs-number">3</span>,
+                    <span class="hljs-string">&quot;AcquisitionNumber&quot;</span>: <span class="hljs-number">0</span>,
+                    <span class="hljs-string">&quot;PhotometricInterpretation&quot;</span>: <span class="hljs-string">&quot;MONOCHROME2&quot;</span>,
+                    <span class="hljs-string">&quot;BitsAllocated&quot;</span>: <span class="hljs-number">16</span>,
+                    <span class="hljs-string">&quot;BitsStored&quot;</span>: <span class="hljs-number">16</span>,
+                    <span class="hljs-string">&quot;PixelRepresentation&quot;</span>: <span class="hljs-number">1</span>,
+                    <span class="hljs-string">&quot;SamplesPerPixel&quot;</span>: <span class="hljs-number">1</span>,
+                    <span class="hljs-string">&quot;PixelSpacing&quot;</span>: [<span class="hljs-number">0.390625</span>, <span class="hljs-number">0.390625</span>],
+                    <span class="hljs-string">&quot;HighBit&quot;</span>: <span class="hljs-number">15</span>,
+                    <span class="hljs-string">&quot;ImageOrientationPatient&quot;</span>: [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">-1</span>],
+                    <span class="hljs-string">&quot;ImagePositionPatient&quot;</span>: [<span class="hljs-number">11.600000</span>,<span class="hljs-number">-92.500000</span>, <span class="hljs-number">98.099998</span>],
+                    <span class="hljs-string">&quot;FrameOfReferenceUID&quot;</span>: <span class="hljs-string">&quot;1.2.840.113619.2.5.1762583153.223134.978956938.470&quot;</span>,
+                    <span class="hljs-string">&quot;ImageType&quot;</span>: [<span class="hljs-string">&quot;ORIGINAL&quot;</span>,<span class="hljs-string">&quot;PRIMARY&quot;</span>,<span class="hljs-string">&quot;OTHER&quot;</span>],
+                    <span class="hljs-string">&quot;Modality&quot;</span>: <span class="hljs-string">&quot;MR&quot;</span>,
+                    <span class="hljs-string">&quot;SOPInstanceUID&quot;</span>: <span class="hljs-string">&quot;1.2.840.113619.2.5.1762583153.215519.978957063.124&quot;</span>,
+                    <span class="hljs-string">&quot;SeriesInstanceUID&quot;</span>: <span class="hljs-string">&quot;1.2.840.113619.2.5.1762583153.215519.978957063.121&quot;</span>,
+                    <span class="hljs-string">&quot;StudyInstanceUID&quot;</span>: <span class="hljs-string">&quot;1.2.840.113619.2.5.1762583153.215519.978957063.78&quot;</span>
+                },
+                <span class="hljs-string">&quot;url&quot;</span>: <span class="hljs-string">&quot;dicomweb://s3.amazonaws.com/lury/MRStudy/1.2.840.113619.2.5.1762583153.215519.978957063.124.dcm&quot;</span>
+             }
+           ]
+         }
+       ]
+     }
+   ]
+}
+</code></pre>
+<p>More info on this JSON format can be found here <a href="https://github.com/OHIF/Viewers/issues/1500" target="_blank">Issue #1500</a></p>
+<p><strong>Implementation Notes:</strong></p>
+<ol>
+<li>When hosting the viewer, you will also need to host a /viewer route on the server - or the browser may not be able to find the route.</li>
+<li>For each instance url (dicom object) in the returned JSON, you must prefix the <code>url</code> with <code>dicomweb:</code> in order for the cornerstone image loader to retrieve it correctly.
+eg. <code>https://image-server/my-image.dcm</code> ---&gt; <code>dicomweb:https://image-server/my-image.dcm</code></li>
+<li>The JSON format above is compatible with &gt;= v3.7.8 of the application. Older versions of the viewer used a different JSON format. As of 20/04/20 the public [<a href="https://viewer.ohif.org/" target="_blank">https://viewer.ohif.org/</a>] is a pre 3.0 version that does not support this format yet.</li>
+<li>The JSON format is case-sensitive. Please ensure you have matched casing with the naturalised Dicom format referenced in <a href="https://github.com/OHIF/Viewers/issues/1500" target="_blank">Issue #1500</a>.</li>
+</ol>
+<p><em>CORS Issues (Cross-Origin Resource Sharing)</em></p>
+<p>If you host a JSON API or Images on a different domain from the the app itself, you will likely have CORS issues. This will also happen when testing from Localhost and reaching out to remote servers.
+Even if the domain is the same, different ports, subdomains or protocols (https vs http) will also cause CORS errors.
+You will to need add a configuration on each server hosting these assets to allow your App server origin.</p>
+<p>For example:</p>
+<p>Lets assume your application is hosted on <code>https://my-ohif-server.com</code>.</p>
+<p>Your JSON API is hosted on <code>https://my-json-api.aws.com</code></p>
+<p>And your images are stored on Amazon S3 at <code>https://my-s3-bucket.aws.com</code></p>
+<p>When you first start your application, browsing to <code>https://my-ohif-server.com/viewer?url=https://my-json-api.aws.com/api/my-json-study-info.json</code>, you will likely get a CORS error in the browser console as it tries to connect to <code>https://my-json-api.aws.com</code>.</p>
+<p>Adding a setting on the JSON server to allow the CORS origin = <code>https://my-ohif-server.com</code> should solve this.</p>
+<p>Next, you will likely get a similar CORS error, as the browser tries to go to <code>https://my-s3-bucket.aws.com</code>.
+You will need to go to the S3 bucket configuration, and add a CORS setting to allow origin = <code>https://my-ohif-server.com</code>.</p>
+<p>Essentially, whenever the application connects to a remote resource, you will need to add the applications url to the allowed CORS Origins on that resource. Adding an origin similar to <a href="https://localhost:3000" target="_blank">https://localhost:3000</a> will also allow for local testing.</p>
 <h3 id="securing-your-data"><a name="securing-your-data" class="plugin-anchor" href="#securing-your-data"><i class="fa fa-link" aria-hidden="true"></i></a>Securing Your Data</h3>
 <blockquote>
 <p>Feeling lost? Securing your data is important, and it can be hard to tell if
@@ -1125,7 +1200,7 @@ Please feel free to suggest or contribute your own recipes.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Deployment","level":"3.1","depth":1,"next":{"title":"Embedded","level":"3.1.1","depth":2,"anchor":"#embedded-viewer","path":"deployment/index.md","ref":"deployment/index.md#embedded-viewer","articles":[]},"previous":{"title":"Notification Service","level":"2.4.2.3","depth":3,"path":"services/ui/ui-notification-service.md","ref":"services/ui/ui-notification-service.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-cornerstone","-fontsettings","github","ga","sitemap","anchors","versions"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/OHIF/Viewers"},"search":{},"theme-cornerstone":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sitemap":{"hostname":"https://docs.ohif.org"},"ga":{"configuration":"auto","token":"UA-110573590-2"},"versions":{"type":"branches","gitbookConfigURL":"https://raw.githubusercontent.com/OHIF/Viewers/master/docs/book.json","options":[{"value":"https://docs.ohif.org/history/v1/","text":"Version 1.0.0 (Meteor)"},{"value":"https://docs.ohif.org/","text":"Version 2.0.0","selected":true}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/OHIF/Viewers/edit/master/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"OHIF","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0","description":"Documentation for the OHIF framework"},"file":{"path":"deployment/index.md","mtime":"2020-04-27T08:39:39.440Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-27T08:40:17.146Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Deployment","level":"3.1","depth":1,"next":{"title":"Embedded","level":"3.1.1","depth":2,"anchor":"#embedded-viewer","path":"deployment/index.md","ref":"deployment/index.md#embedded-viewer","articles":[]},"previous":{"title":"Notification Service","level":"2.4.2.3","depth":3,"path":"services/ui/ui-notification-service.md","ref":"services/ui/ui-notification-service.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-cornerstone","-fontsettings","github","ga","sitemap","anchors","versions"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/OHIF/Viewers"},"search":{},"theme-cornerstone":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sitemap":{"hostname":"https://docs.ohif.org"},"ga":{"configuration":"auto","token":"UA-110573590-2"},"versions":{"type":"branches","gitbookConfigURL":"https://raw.githubusercontent.com/OHIF/Viewers/master/docs/book.json","options":[{"value":"https://docs.ohif.org/history/v1/","text":"Version 1.0.0 (Meteor)"},{"value":"https://docs.ohif.org/","text":"Version 2.0.0","selected":true}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/OHIF/Viewers/edit/master/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"OHIF","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0","description":"Documentation for the OHIF framework"},"file":{"path":"deployment/index.md","mtime":"2020-04-27T20:12:07.341Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-27T20:12:48.907Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
