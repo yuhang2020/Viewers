@@ -47,7 +47,6 @@ module.exports = {
         name: "images",
         path: `${__dirname}/src/images/`,
       },
-      __key: "images",
     },
     {
       resolve: "gatsby-source-filesystem",
@@ -55,15 +54,19 @@ module.exports = {
         name: "pages",
         path: `${__dirname}/src/pages/`,
       },
-      __key: "pages",
     },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "pages",
-        path: `${__dirname}/src/pages/versions/`,
-      },
-      __key: "versioned-docs",
-    },
+
   ],
 };
+
+
+// query MyQuery {
+//   allMdx(filter: { fileAbsolutePath: { regex: "\\/v3/" } }) {
+//     edges {
+//       node {
+//         id
+//         slug
+//       }
+//     }
+//   }
+// }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StaticQuery, graphql, Link } from "gatsby"
+import { useStaticQuery, graphql, Link } from "gatsby"
 import Header from './header.js';
 import Footer from './footer.js';
 import './default-page-layout.scss';
@@ -32,24 +32,25 @@ function DefaultPageLayout ({ children, ...rest }) {
   )
 }
 
-function Navigation() {
-  return(<StaticQuery
-    query={graphql`
-      query {
-        allMdx {
-          edges {
-            node {
-              id
-              slug
-              frontmatter {
-                title
-              }
-            }
-          }
+const query = graphql`{
+  allMdx {
+    edges {
+      node {
+        slug
+        id
+        frontmatter {
+          title
         }
       }
-    `}
-    render={data => (
+    }
+  }
+}
+`
+
+
+function Navigation() {
+  const data = useStaticQuery(query)
+  return (
       <nav style={{ minWidth: '273px', maxWidth: '273px', paddingLeft: '28px' }}>
         <ul>
           {data.allMdx.edges.map(edge => {
@@ -64,7 +65,6 @@ function Navigation() {
           })}
         </ul>
       </nav>
-    )}
-  />)
+  )
 }
 export default DefaultPageLayout;
