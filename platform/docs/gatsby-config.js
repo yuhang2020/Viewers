@@ -19,6 +19,16 @@ module.exports = {
         icon: "src/images/icon.png",
       },
     },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `inter`,
+          `source sans pro\:300,400,400i,700`
+        ],
+        display: 'swap',
+      },
+    },
     "gatsby-transformer-remark",
     {
       resolve: `gatsby-plugin-mdx`,
@@ -35,7 +45,7 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "images",
-        path: "./src/images/",
+        path: `${__dirname}/src/images/`,
       },
       __key: "images",
     },
@@ -43,7 +53,7 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "pages",
-        path: "./src/pages/",
+        path: `${__dirname}/src/pages/`,
       },
       __key: "pages",
     },
@@ -51,7 +61,7 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "pages",
-        path: "./src/versions/",
+        path: `${__dirname}/src/pages/versions/`,
       },
       __key: "versioned-docs",
     },

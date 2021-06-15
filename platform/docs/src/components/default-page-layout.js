@@ -20,9 +20,7 @@ function DefaultPageLayout ({ children, ...rest }) {
           <Navigation />
           {/* RIGHT - Main */}
           <main
-            style={{
-              padding: '0 32px'
-            }}
+
           >
             {children}
           </main>
@@ -52,14 +50,14 @@ function Navigation() {
       }
     `}
     render={data => (
-      <nav style={{ minWidth: '180px', maxWidth: '180px' }}>
+      <nav style={{ minWidth: '273px', maxWidth: '273px', paddingLeft: '28px' }}>
         <ul>
           {data.allMdx.edges.map(edge => {
             const lnk = edge.node;
             const title = lnk.frontmatter.title || lnk.slug;
 
             return (
-              <li>
+              <li style={{ paddingLeft: '30px' }}>
                 <Link to={`/${lnk.slug}`}>{title}</Link>
               </li>
             );

@@ -2,4 +2,45 @@
 
 header {
   padding: 0.75rem;
+  height: 75px;
+  margin: 0 0 55px;
+  padding: 16px 33px 16px 25px;
+  background-color: #080b2b;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-items {
+  display: flex;
+
+}
+
+.donate-btn {
+  width: 103px;
+  height: 35px;
+  padding: 8px 11px 7px 10px;
+  border-radius: 5px;
+  background-color: #0944b3;
+  display: flex;
+}
+
+.donate-text{
+  width: 58px;
+  height: 20px;
+  margin: 0 0 0 9px;
+  font-family: Inter;
+  font-size: 17px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+
+.donate-heart{
+  width: 15px;
+  height: 13px;
+  margin: 4px 9px 3px 0;
+  border: solid 1.3px #ffffff;
 }
