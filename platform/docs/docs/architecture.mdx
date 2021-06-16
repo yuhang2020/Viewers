@@ -1,9 +1,44 @@
 ---
-sidebar_position: 7
-sidebar_label: Architecture
+sidebar_position: 6
+sidebar_label: Panel
 ---
 
+import { Button, IconButton, Icon, ListMenu, ToolbarButton} from '../../ui/src/components';
+// import { MeasurementTable } from '../../ui/src/components';
+
 # Architecture
+
+
+
+
+<div className="p-4">
+  <Button variant="outlined" className="m-1">
+    Default
+  </Button>
+  <Button variant="outlined" color="primary" className="m-1">
+    Primary
+  </Button>
+  <Button variant="outlined" color="secondary" className="m-1">
+    Secondary
+  </Button>
+  <Button variant="outlined" color="white" className="m-1">
+    White
+  </Button>
+</div>
+
+
+<!-- ```jsx live
+function MyPlayground(props) {
+  return (
+    <div>
+      <ListMenu></ListMenu>
+    </div>
+  );
+}
+``` -->
+
+
+
 
 
 >New `OHIF-v3` architecture has made OHIF a general purpose extensible medical imaging **platform**, as opposed to a somewhat highly configurable viewer.
@@ -24,6 +59,7 @@ single project, contains many projects. If you explore our project structure,
 you'll see the following:
 
 ```bash
+.
 │
 ├── extensions
 │   ├── _example             # Skeleton of example extension
@@ -73,12 +109,12 @@ in `OHIF-v3` and their api is expanded. In summary:
 
 OHIF team maintains several high value and commonly used functionalities in its
 own extensions. For a list of extensions maintained by OHIF,
-[check out this helpful table](./extensions/index.md#maintained-extensions).
+[check out this helpful table](../extensions/index.md#maintained-extensions).
 As an example `default` extension provides a default viewer layout,
 a study/series browser and a datasource that maps to a DICOMWeb compliant backend.
 
 
-[Click here to read more about extensions!](./extensions/index.md)
+[Click here to read more about extensions!](../extensions/index.md)
 
 
 
@@ -124,7 +160,7 @@ To summarize the difference between extensions and modes in `OHIF-v3` and extens
 > - In v2 extensions are “plugins” that add functionality to a core viewer.
 > - In v3 extensions are building blocks that a mode uses to build an entire viewer layout.
 
-[Click here to read more about modes!](./modes/index.md)
+[Click here to read more about modes!](../modes/index.md)
 
 
 
@@ -199,7 +235,7 @@ your functionality in one of the modules of your new extension,  and let the mod
 [viewers-project]: https://github.com/OHIF/Viewers
 [viewer-npm]: https://www.npmjs.com/package/@ohif/viewer
 [pwa]: https://developers.google.com/web/progressive-web-apps/
-[configuration]: ./configuring/index.md
+[configuration]: ../configuring/index.md
 [extensions]: ../extensions/index.md
 [core-github]: https://github.com/OHIF/viewers/platform/core
 [ui-github]: https://github.com/OHIF/Viewers/tree/master/platform/ui
