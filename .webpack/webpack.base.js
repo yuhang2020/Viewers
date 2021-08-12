@@ -39,13 +39,16 @@ module.exports = (env, argv, { SRC_DIR, DIST_DIR }) => {
       app: `${SRC_DIR}/index.js`,
     },
     optimization: {
-      splitChunks: {
+      /*splitChunks: {
         // include all types of chunks
         chunks: 'all',
-      },
-      runtimeChunk: 'single',
+      },*/
+      //runtimeChunk: 'single',
       minimize: isProdBuild,
       sideEffects: true,
+    },
+    output: {
+      clean: true,
     },
     context: SRC_DIR,
     stats: {
