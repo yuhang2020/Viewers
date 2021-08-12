@@ -8,6 +8,7 @@ function transpileJavaScript(mode) {
           // 'dicomweb-client',
           // https://github.com/react-dnd/react-dnd/blob/master/babel.config.js
           'react-dnd',
+          // 'cornerstone-wado-image-loader',
           // https://github.com/dcmjs-org/dcmjs/blob/master/.babelrc
           // https://github.com/react-dnd/react-dnd/issues/1342
           // 'dcmjs', // contains: loglevelnext
@@ -19,9 +20,10 @@ function transpileJavaScript(mode) {
           // 'ol', --> Should be fine
         ])
       : excludeNodeModulesExcept([]);
+  //: excludeNodeModulesExcept(['cornerstone-wado-image-loader']);
 
   return {
-    test: /\.jsx?$/,
+    test: /\.(mjs|js|jsx)?$/,
     // These are packages that are not transpiled to our lowest supported
     // JS version (currently ES5). Most of these leverage ES6+ features,
     // that we need to transpile to a different syntax.
