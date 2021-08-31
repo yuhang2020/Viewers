@@ -32,9 +32,16 @@ export default function initWADOImageLoader(UserAuthenticationService) {
     beforeSend: function(xhr) {
       const headers = UserAuthenticationService.getAuthorizationHeader();
 
-      if (headers && headers.Authorization) {
-        xhr.setRequestHeader('Authorization', headers.Authorization);
+      // Request loss-less compressed from server (if there is)
+      const xhrRequestHeaders = {
+        'accept': 'multipart/related; type="image/x-jls"'
       }
+
+      if (headers && headers.Authorization) {
+        xhrRequestHeaders.Authorization = headers.Authorization
+      }
+
+      return xhrRequestHeaders
     },
     errorInterceptor: error => {
       errorHandler.getHTTPErrorHandler(error)
