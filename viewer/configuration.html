@@ -974,6 +974,33 @@ are:</p>
   extensions: [],
   showStudyList: <span class="hljs-literal">true</span>,
   filterQueryParam: <span class="hljs-literal">false</span>,
+  <span class="hljs-comment">/**
+   * Disable caching of servers configuration.
+   *
+   * There will be no effect if you update the servers property of this config
+   * while your application is running because this property is cached in local storage.
+   */</span>
+  disableServersCache: <span class="hljs-literal">false</span>,
+  <span class="hljs-comment">/**
+   * OHIF&apos;s study prefetcher configuration.
+   *
+   * @param {boolean} enabled Whether to enable/disable OHIF&apos;s study prefetcher
+   * @param {(&apos;all&apos;|&apos;closest&apos;|&apos;downward&apos;|&apos;upward&apos;|&apos;topdown&apos;)} order Fetching order: all display sets, the closest ones, downward or top down fashion based on the currently selected display set
+   * @param {number} displaySetCount How much display sets should be prefetched at once (note: this attribute is ignored if order was set to &apos;all&apos;)
+   * @param {boolean} preventCache Prevent images to be cached in Cornerstone Tools&apos;s request pool manager
+   * @param {number} prefetchDisplaySetsTimeout Prefetch timeout
+   * @param {boolean} displayProgress Whether to display or not the progress bar in the display set
+   * @param {boolean} includeActiveDisplaySet Include or not the active display set while prefetching
+   */</span>
+  studyPrefetcher: {
+    enabled: <span class="hljs-literal">true</span>,
+    order: <span class="hljs-string">&apos;all&apos;</span>,
+    displaySetCount: <span class="hljs-number">1</span>,
+    preventCache: <span class="hljs-literal">false</span>,
+    prefetchDisplaySetsTimeout: <span class="hljs-number">300</span>,
+    displayProgress: <span class="hljs-literal">false</span>,
+    includeActiveDisplaySet: <span class="hljs-literal">true</span>,
+  },
   servers: {
     dicomWeb: [
       {
@@ -988,7 +1015,14 @@ are:</p>
       },
     ],
   },
-  <span class="hljs-comment">// Supported Keys: https://craig.is/killing/mice</span>
+  <span class="hljs-comment">/**
+   * Hotkey definitions.
+   * Supported Keys: https://craig.is/killing/mice
+   *
+   * @param {string} commandName
+   * @param {string} label
+   * @param {array} keys
+   */</span>
   hotkeys: [
     { commandName: <span class="hljs-string">&apos;rotateViewportCW&apos;</span>, label: <span class="hljs-string">&apos;Rotate Right&apos;</span>, keys: [<span class="hljs-string">&apos;r&apos;</span>] },
     { commandName: <span class="hljs-string">&apos;rotateViewportCCW&apos;</span>, label: <span class="hljs-string">&apos;Rotate Left&apos;</span>, keys: [<span class="hljs-string">&apos;l&apos;</span>] },
@@ -1004,14 +1038,16 @@ are:</p>
       keys: [<span class="hljs-string">&apos;v&apos;</span>],
     },
   ],
-  <span class="hljs-comment">/* Configuration passed to the bundled cornerstone extension
+  <span class="hljs-comment">/**
+   * Configuration passed to the bundled cornerstone extension
    *
    * The cornerstone extension is currently tightly coupled to the platform.
    * Until we&apos;re able to decouple it, this key will serve as a workaround to
    * pass it configuration.
+   *
+   * @param {boolean} hideHandles Whether to show/hide annotation &quot;handles&quot;
    */</span>
   cornerstoneExtensionConfig: {
-    <span class="hljs-comment">/* Whether to show/hide annotation &quot;handles&quot; */</span>
     hideHandles: <span class="hljs-literal">true</span>,
   },
 };
@@ -1065,7 +1101,7 @@ are:</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Configuration","level":"2.2.1","depth":2,"next":{"title":"Themeing","level":"2.2.2","depth":2,"path":"viewer/themeing.md","ref":"viewer/themeing.md","articles":[]},"previous":{"title":"Viewer","level":"2.2","depth":1,"path":"viewer/index.md","ref":"viewer/index.md","articles":[{"title":"Configuration","level":"2.2.1","depth":2,"path":"viewer/configuration.md","ref":"viewer/configuration.md","articles":[]},{"title":"Themeing","level":"2.2.2","depth":2,"path":"viewer/themeing.md","ref":"viewer/themeing.md","articles":[]},{"title":"Internationalization","level":"2.2.3","depth":2,"path":"viewer/internationalization.md","ref":"viewer/internationalization.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-cornerstone","-fontsettings","github","ga","anchors","versions"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/OHIF/Viewers"},"search":{},"theme-cornerstone":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sitemap":{"hostname":"https://docs.ohif.org","todo":"sitemap plugin removed; causing build errors"},"ga":{"configuration":"auto","token":"UA-110573590-2"},"versions":{"type":"branches","gitbookConfigURL":"https://raw.githubusercontent.com/OHIF/Viewers/master/docs/book.json","options":[{"value":"https://docs.ohif.org/history/v1/","text":"Version 1.0.0 (Meteor)"},{"value":"https://docs.ohif.org/","text":"Version 2.0.0","selected":true}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/OHIF/Viewers/edit/master/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"OHIF","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0","description":"Documentation for the OHIF framework"},"file":{"path":"viewer/configuration.md","mtime":"2021-09-03T20:58:16.232Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-03T20:59:21.212Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Configuration","level":"2.2.1","depth":2,"next":{"title":"Themeing","level":"2.2.2","depth":2,"path":"viewer/themeing.md","ref":"viewer/themeing.md","articles":[]},"previous":{"title":"Viewer","level":"2.2","depth":1,"path":"viewer/index.md","ref":"viewer/index.md","articles":[{"title":"Configuration","level":"2.2.1","depth":2,"path":"viewer/configuration.md","ref":"viewer/configuration.md","articles":[]},{"title":"Themeing","level":"2.2.2","depth":2,"path":"viewer/themeing.md","ref":"viewer/themeing.md","articles":[]},{"title":"Internationalization","level":"2.2.3","depth":2,"path":"viewer/internationalization.md","ref":"viewer/internationalization.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-cornerstone","-fontsettings","github","ga","anchors","versions"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/OHIF/Viewers"},"search":{},"theme-cornerstone":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"sitemap":{"hostname":"https://docs.ohif.org","todo":"sitemap plugin removed; causing build errors"},"ga":{"configuration":"auto","token":"UA-110573590-2"},"versions":{"type":"branches","gitbookConfigURL":"https://raw.githubusercontent.com/OHIF/Viewers/master/docs/book.json","options":[{"value":"https://docs.ohif.org/history/v1/","text":"Version 1.0.0 (Meteor)"},{"value":"https://docs.ohif.org/","text":"Version 2.0.0","selected":true}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/OHIF/Viewers/edit/master/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"OHIF","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0","description":"Documentation for the OHIF framework"},"file":{"path":"viewer/configuration.md","mtime":"2021-09-09T07:59:11.773Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-09T07:59:57.006Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
