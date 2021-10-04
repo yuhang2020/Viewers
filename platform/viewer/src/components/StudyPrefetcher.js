@@ -5,36 +5,42 @@ import PropTypes from 'prop-types';
 
 import './StudyPrefetcher.css';
 
-const StudyPrefetcher = ({ studies, options, activeViewportData }) => {
+const StudyPrefetcher = props => {
+  const { studies, options, activeViewportDisplaySetInstanceUID } = props;
+  // useTraceUpdate(props);
   useEffect(() => {
     const studyPrefetcher = classes.StudyPrefetcher.getInstance(
       studies,
       options
     );
+
+    if (!studies.length) {
+      return;
+    }
     const studiesMetadata = studies.map(s =>
       utils.studyMetadataManager.get(s.StudyInstanceUID)
     );
+
     studyPrefetcher.setStudies(studiesMetadata);
+    studyPrefetcher.prefetch(activeViewportDisplaySetInstanceUID);
 
     return () => {
       studyPrefetcher.destroy();
     };
-  }, [options, studies]);
+  }, [activeViewportDisplaySetInstanceUID, options, studies]);
 
-  useEffect(() => {
-    if (!activeViewportData || !activeViewportData.plugin === 'cornerstone') {
-      return;
-    }
+  // useEffect(() => {
+  //   // if (!activeViewportData || !activeViewportData.plugin === 'cornerstone') {
+  //   //   return;
+  //   // }
 
-    const studyPrefetcher = classes.StudyPrefetcher.getInstance();
-
-    const { displaySetInstanceUID } = activeViewportData;
-    if (!displaySetInstanceUID) {
-      return;
-    }
-
-    studyPrefetcher.prefetch(displaySetInstanceUID);
-  }, [activeViewportData]);
+  //   // const { displaySetInstanceUID } = activeViewportData;
+  //   if (!activeViewportDisplaySetInstanceUID) {
+  //     return;
+  //   }
+  //   const studyPrefetcher = classes.StudyPrefetcher.getInstance();
+  //   studyPrefetcher.prefetch(activeViewportDisplaySetInstanceUID);
+  // }, [activeViewportDisplaySetInstanceUID]);
 
   return null;
 };

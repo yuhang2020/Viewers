@@ -1,5 +1,4 @@
 import cornerstone from 'cornerstone-core';
-import cornerstoneTools from 'cornerstone-tools';
 
 import getImageId from '../utils/getImageId.js';
 
@@ -71,7 +70,7 @@ export class StudyPrefetcher {
     this.studies = studies;
   }
 
-  getStudyFromDisplaySet(displaySetInstanceUID) {
+  getStudyFromDisplaySetInstanceUID(displaySetInstanceUID) {
     return this.studies.find(study => {
       if (!study.displaySets) {
         return;
@@ -104,7 +103,12 @@ export class StudyPrefetcher {
    * Stop prefetching images.
    */
   stopPrefetching() {
-    cornerstone.imageLoadPoolManager.clearRequestStack('prefetch');
+    cornerstone.imageLoadPoolManager.clearRequestStack(
+      this.options.requestType
+    );
+    cornerstone.imageRetrievalPoolManager.clearRequestStack(
+      this.options.requestType
+    );
   }
 
   /**
@@ -131,12 +135,15 @@ export class StudyPrefetcher {
     const displaySetsToPrefetch = this.getDisplaySetsToPrefetch(
       displaySetInstanceUID
     );
+
     if (!displaySetsToPrefetch) {
       return;
     }
 
-    console.debug(displaySetsToPrefetch.map(a => a.SeriesDescription));
-
+    console.debug('printing now');
+    displaySetsToPrefetch.forEach(ds => {
+      console.debug('displaySetsToPrefetch', ds.SeriesDescription);
+    });
     const imageIds = this.getImageIdsFromDisplaySets(displaySetsToPrefetch);
     this.prefetchImageIds(imageIds);
   }
@@ -148,76 +155,39 @@ export class StudyPrefetcher {
    */
   prefetchImageIds(imageIds) {
     const nonCachedImageIds = this.filterCachedImageIds(imageIds);
-    const imageLoadPoolManager = cornerstone.imageLoadPoolManager;
 
-    let requestFn;
-    if (this.options.preventCache) {
-      requestFn = id => cornerstone.loadImage(id);
-    } else {
-      requestFn = id => cornerstone.loadAndCacheImage(id);
-    }
-
-    const priority = 5;
+    const { requestType } = this.options;
+    const priority = 0;
     const addToBeginning = false;
 
-    nonCachedImageIds.forEach(imageId => {
-      imageLoadPoolManager.addRequest(
-        requestFn.bind(this, imageId),
-        this.options.requestType,
-        {
-          imageId,
-        },
-        priority,
-        addToBeginning
-      );
-    });
-  }
+    // ImageRetrievalPool manager needs these options to set the retrieve
+    // request (usually xhrRequest) with correct settings
+    const options = {
+      priority: 10,
+      addToBeginning,
+      requestType: 'prefetch',
+    };
+    let requestFn;
+    if (this.options.preventCache) {
+      requestFn = id => cornerstone.loadImage(id, options);
+    } else {
+      requestFn = id => cornerstone.loadAndCacheImage(id, options);
+    }
 
-  /**
-   * Get study by cornerstone image instance.
-   *
-   * @param {object} image
-   * @returns
-   */
-  getStudy(image) {
-    const StudyInstanceUID = cornerstone.metaData.get(
-      'StudyInstanceUID',
-      image.imageId
-    );
-    const studies = this.studies;
-    return studies.find(
-      study => study.getData().StudyInstanceUID === StudyInstanceUID
-    );
-  }
-
-  /**
-   * Get study series by cornerstone image instance.
-   *
-   * @param {object} study OHIF study instance
-   * @param {object} image cornerstone image instance object
-   * @returns
-   */
-  getSeries(study, image) {
-    const SeriesInstanceUID = cornerstone.metaData.get(
-      'SeriesInstanceUID',
-      image.imageId
-    );
-    return study.getSeriesByUID(SeriesInstanceUID);
-  }
-
-  /**
-   * Get sop instance by cornerstone image instance.
-   *
-   * @param {array} series
-   * @param {object} image
-   * @returns
-   */
-  getInstance(series, image) {
-    const instanceMetadata = cornerstone.metaData.get(
-      'instance',
-      image.imageId
-    );
-    return series.getInstanceByUID(instanceMetadata.SOPInstanceUID);
+    console.debug('imageIds', nonCachedImageIds.length);
+    setTimeout(() => {
+      nonCachedImageIds.forEach(imageId => {
+        cornerstone.imageLoadPoolManager.addRequest(
+          requestFn.bind(this, imageId),
+          requestType,
+          {
+            imageId,
+          },
+          priority,
+          addToBeginning
+        );
+      });
+    }, 0);
   }
 
   /**
@@ -240,28 +210,13 @@ export class StudyPrefetcher {
   }
 
   /**
-   * Get display set by SOPInstanceUID.
-   *
-   * @param {array} displaySets
-   * @param {object} instance
-   * @returns
-   */
-  getDisplaySetBySOPInstanceUID(displaySets, instance) {
-    return displaySets.find(displaySet => {
-      return displaySet.images.some(displaySetImage => {
-        return displaySetImage.SOPInstanceUID === instance.SOPInstanceUID;
-      });
-    });
-  }
-
-  /**
    * Prefetch display sets based on cornerstone viewport element image.
    *
    * @param {string} displaySetInstanceUID the display set instance uid
    * @returns {array} displaySets
    */
   getDisplaySetsToPrefetch(displaySetInstanceUID) {
-    const study = this.getStudyFromDisplaySet(displaySetInstanceUID);
+    const study = this.getStudyFromDisplaySetInstanceUID(displaySetInstanceUID);
     if (!study) {
       return;
     }
@@ -289,6 +244,11 @@ export class StudyPrefetcher {
       return [];
     }
 
+    // Re-order the displaysets to put the active displayset in the beginning
+    const index = displaySets.indexOf(activeDisplaySet);
+    displaySets.splice(index, 1);
+    displaySets.unshift(activeDisplaySet);
+
     return getDisplaySets.call(
       this,
       displaySets,
@@ -313,15 +273,9 @@ export class StudyPrefetcher {
     displaySetCount,
     includeActiveDisplaySet
   ) {
-    const length = displaySets.length;
-    const selectedDisplaySets = [];
+    // Reorder displaysets and put active one first
 
-    for (let i = 0; i < length; i++) {
-      const displaySet = displaySets[i];
-      selectedDisplaySets.push(displaySet);
-    }
-
-    return selectedDisplaySets;
+    return displaySets;
   }
 
   /**
